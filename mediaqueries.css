@@ -55,7 +55,9 @@
   #profile {
     height: 83vh;
     margin-bottom: 0;
+
   }
+
   article {
     font-size: 1rem;
   }
@@ -99,5 +101,39 @@
   }
   .text-container {
     text-align: justify;
+  }
+  /* CSS — add near the end of `style.css` or in `mediaqueries.css` */
+  @media (max-width: 600px) {
+    #profile {
+      display: flex;
+      flex-direction: column;    /* stack pic + text */
+      justify-content: center;   /* center vertically */
+      align-items: center;       /* center horizontally */
+      gap: 1.5rem;
+      height: 100vh;             /* full viewport so centering is vertical */
+      padding-top: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    #about .section__pic-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 4%;
+      width: 90%;
+      margin: 0.5rem auto;
+      height: auto;
+    }
+
+    #about .section__pic-container img.about-pic {
+      width: 48%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 1rem;
+      display: block;
+    }
+
+
   }
 }
