@@ -95,9 +95,8 @@ a:hover {
 
 /* HAMBURGER MENU */
 
-#hamburger-nav {
-  display: none;
-}
+#hamburger-nav { position: relative; z-index: 30; }
+
 
 .hamburger-menu {
   position: relative;
@@ -105,12 +104,17 @@ a:hover {
 }
 
 .hamburger-icon {
-  display: flex;
+  width: 48px;
+  height: 40px;
+  display: inline-flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 24px;
-  width: 30px;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 6px;
+  border-radius: 10px;
+  transition: background 160ms ease;
 }
 
 .hamburger-icon span {
@@ -118,6 +122,112 @@ a:hover {
   height: 2px;
   background-color: black;
   transition: all 0.3s ease-in-out;
+}
+.hamburger-icon:active { background: rgba(0,0,0,0.06); }
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: #111; /* change to your color */
+  transition: transform 300ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease, width 220ms ease;
+  transform-origin: center;
+  width: 28px;
+}
+
+/* Slight variation for first/third line for better x-shape */
+.hamburger-icon span:nth-child(1) { transform-origin: left center; }
+.hamburger-icon span:nth-child(3) { transform-origin: left center; }
+
+/* Open state: morph into X */
+.hamburger-icon.open span:nth-child(1) {
+  transform: translateX(3px) rotate(45deg);
+  width: 28px;
+}
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+  width: 18px;
+}
+.hamburger-icon.open span:nth-child(3) {
+  transform: translateX(3px) rotate(-45deg);
+  width: 28px;
+}
+
+/* Slide-in menu panel */
+.menu-links {
+  position: fixed;
+  top: 0;
+  right: -110%;
+  width: min(84%, 360px);
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,250,0.9));
+  backdrop-filter: blur(8px);
+  box-shadow: -18px 24px 48px rgba(0,0,0,0.25);
+  padding: 72px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform: translateX(0);
+  transition: right 360ms cubic-bezier(.2,.9,.3,1);
+  z-index: 40;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* When open */
+.menu-links.open { right: 0; }
+
+/* Menu links styling */
+.menu-links li {
+  list-style: none;
+}
+.menu-links a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #0b0b0b;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.menu-links a:active,
+.menu-links a:hover {
+  background: rgba(0,0,0,0.04);
+  transform: translateX(6px);
+}
+
+/* Add a larger CTA */
+.menu-links .cta {
+  margin-top: 12px;
+  background: linear-gradient(90deg,#2b7cff,#6bd1ff);
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Overlay that dims the page behind menu */
+#menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.38);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: 35;
+  pointer-events: none;
+}
+#menu-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile specific sizing (optional) */
+@media (min-width: 720px) {
+  /* hide hamburger on desktop if needed */
+  #hamburger-nav { display: none; }
 }
 
 .menu-links {
@@ -633,4 +743,84 @@ footer p {
   margin-right: 0.5rem; /* space between words */
   font-weight: 700;      /* optional: make text bold */
   font-size: 1.50rem;    /* optional: match parent size */
+}
+
+:root{
+  --gold:#30ba73; /* or: #D8B637 */
+  --text:#0b0b0b;
+}
+
+/* HAMBURGER MENU (version off-canvas) */
+
+/* conteneur mobile visible, caché en desktop */
+#hamburger-nav { position: relative; z-index: 30; display:flex; align-items:center; justify-content:space-between; height:74px; padding:0 20px; }
+@media (min-width: 920px){
+  #hamburger-nav{ display:none; }
+  /* tes liens .nav-links desktop restent visibles */
+}
+
+/* bouton hamburger */
+.hamburger-icon{
+  width:48px; height:40px; display:inline-flex; flex-direction:column; justify-content:center; gap:6px;
+  cursor:pointer; -webkit-tap-highlight-color:transparent; padding:6px; border-radius:10px; transition:background .16s;
+}
+.hamburger-icon:active{ background:rgba(0,0,0,.06); }
+.hamburger-icon span{
+  display:block; height:3px; border-radius:3px; background:#111; width:28px;
+  transition:transform 300ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease, width 220ms ease; transform-origin:left center;
+}
+.hamburger-icon.open span:nth-child(1){ transform: translateX(3px) rotate(45deg); }
+.hamburger-icon.open span:nth-child(2){ opacity:0; transform: translateX(-10px); width:18px; }
+.hamburger-icon.open span:nth-child(3){ transform: translateX(3px) rotate(-45deg); }
+
+/* overlay */
+#menu-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.38); backdrop-filter:blur(2px);
+  opacity:0; transition:opacity .22s ease; z-index:40; pointer-events:none;
+}
+#menu-overlay.visible{ opacity:1; pointer-events:auto; }
+
+/* panneau latéral */
+.menu-links{
+  position:fixed; top:0; right:-110%;
+  width:min(84%, 360px); height:100dvh;
+  background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(250,250,250,.9));
+  backdrop-filter: blur(8px);
+  box-shadow:-18px 24px 48px rgba(0,0,0,.25);
+  padding:28px 22px 110px;   /* espace pour le CTA bas */
+  display:flex; flex-direction:column; gap:10px;
+  transition:right 360ms cubic-bezier(.2,.9,.3,1);
+  z-index:50;
+}
+.menu-links.open{ right:0; }
+
+/* bouton X rond */
+.menu-links .close-round{
+  position:absolute; top:16px; right:16px;
+  width:56px; height:56px; border:none; border-radius:999px;
+  background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.12);
+  display:grid; place-items:center; cursor:pointer; color:#111;
+}
+
+/* logo de marque dans le panneau (optionnel) */
+.menu-links .menu-logo{
+  display:block; margin:26px 6px 24px; font-size:1.9rem; font-weight:800; color:#111; text-decoration:none;
+}
+.menu-links .menu-logo .brand-gold{ color:var(--gold); }
+
+/* liens */
+.menu-links ul{ list-style:none; margin:6px 0; padding:0; }
+.menu-links li{ border-bottom:1px solid rgba(0,0,0,.06); }
+.menu-links a{
+  display:block; padding:18px 8px; border-radius:10px; color:var(--text);
+  font-size:1.6rem; font-weight:700; text-decoration:none; transition:background .16s, transform .16s;
+}
+.menu-links a:hover{ background:rgba(0,0,0,.04); transform:translateX(6px); }
+
+/* CTA bas style “grosse pastille” */
+.menu-links .cta-bottom{
+  position:absolute; left:16px; right:16px; bottom:18px;
+  background:var(--gold); color:#fff; text-align:center;
+  padding:18px 16px; border-radius:999px; font-weight:800; font-size:1.05rem;
+  box-shadow:0 8px 24px rgba(48,	186,	115,.32);
 }

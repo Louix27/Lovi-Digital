@@ -21,21 +21,37 @@
       </div>
     </nav>
     <nav id="hamburger-nav">
-      <div class="logo"><img src="assets/logosansfond.png"></div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">À propos</a></li>
-          <li><a href="#offres" onclick="toggleMenu()">Mes offres</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projets</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
+      <div class="logo"><img src="assets/logosansfond.png" alt="logo"></div>
+
+      <!-- Bouton hamburger -->
+      <button id="burgerBtn" class="hamburger-icon" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sideMenu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- Overlay (fond assombri) -->
+    <div id="menu-overlay" aria-hidden="true"></div>
+
+    <!-- Panneau latéral -->
+    <aside id="sideMenu" class="menu-links" role="dialog" aria-modal="true" aria-label="Menu">
+      <!-- Croix ronde -->
+      <button id="closeMenu" aria-label="Fermer le menu" class="close-round">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#offres">Mes offres</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Gros bouton en bas -->
+      <a href="#contact" class="cta-bottom">Contactez-moi</a>
+    </aside>
+
     <section id="profile">
       <!--<div class="section__pic-container">
         <img src="./assets/profile-pic.png" alt="Louis Palié profile picture" />
