@@ -46,6 +46,23 @@
     margin-top: 0;
   }
 }
+/* 📱 Mode tablette : centre verticalement le texte du hero */
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  #profile {
+    display: grid;           /* plus simple que flex pour centrer */
+    place-items: center;     /* centre horizontal + vertical */
+    min-height: 100vh;       /* occupe toute la hauteur du viewport */
+    padding: 0 5%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  /* Optionnel : limite la largeur du bloc texte pour une meilleure lisibilité */
+  #profile .section__text {
+    max-width: 900px;
+  }
+}
+
 
 @media screen and (max-width: 600px) {
   #contact,

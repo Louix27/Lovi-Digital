@@ -825,3 +825,22 @@ footer p {
   padding:18px 16px; border-radius:999px; font-weight:800; font-size:1.05rem;
   box-shadow:0 8px 24px rgba(48,	186,	115,.32);
 }
+/* 📱 Mode tablette : deux photos côte à côte et plus petites */
+@media screen and (max-width: 1200px) and (min-width: 601px) {
+  #about .section__pic-container {
+    display: flex;
+    flex-direction: row;       /* côte à côte */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;                 /* espace entre les deux */
+    width: 100%;
+    margin: 2rem auto;
+  }
+
+  #about .section__pic-container img.about-pic {
+    width: 40%;                /* plus petites */
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+}
